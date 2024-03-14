@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="author" content="Md Salman Shamil">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>On the Utility of 3D Hand Poses for Action Recognition</title>
+  <link rel="stylesheet" href="stylesheet.css">
+  
+  <link rel="icon" type="image/png" href="images/PHDhat.png">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"  integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.9.0/css/academicons.min.css" integrity="sha512-W4yqoT1+8NLkinBLBZko+dFB2ZbHsYLDdr50VElllRcNt2Q4/GSs6u71UHKxB7S6JEMCp5Ve4xjh3eGQl/HRvg==" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:100,300,400,500,700|Material+Icons">
+</head>
+
+<body>
+
+  <table id="about" class="total" width="1280" border="0" align="center" cellspacing="0" cellpadding="0">
+    <tr>
+      <td>
+
+        <!--Title---------------------------------------------->
+        <table id="title" class="table" align="center" border="0" cellspacing="0" cellpadding="10">
+          <tr class="row">
+            <td class="cell">
+              <tr class="title-text">
+                <td>On the Utility of 3D Hand Poses for Action Recognition</td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="author-names">
+                    <a href="https://s-shamil.github.io/">Md Salman Shamil<sup>1</sup></a>
+                    <a href="https://dibschat.github.io/">Dibyadip Chatterjee<sup>1</sup></a>
+                    <a href="https://scholar.google.com/citations?user=-juoweoAAAAJ">Fadime Sener<sup>2</sup></a>
+                    <a href="https://shugaoma.github.io/">Shugao Ma<sup>2</sup></a>
+                    <a href="https://www.comp.nus.edu.sg/~ayao/">Angela Yao<sup>1</sup></a>
+                  </div>
+                  <div class="institution-names">
+                    <p><sup>1</sup>National University of Singapore</p>
+                    <p><sup>2</sup>Meta Reality Labs Research</p>
+                  </div>
+                  <div class="conference-names">
+                    <p>arXiv 2024</div></p>
+                  <div class="buttons">
+                    <a href="#" title="arXiv" rel="external nofollow noopener" target="_blank"><i class="fas fa-file-pdf"></i> arXiv</a>
+                    <a href="https://github.com/s-shamil/HandFormer" title="Code" rel="external nofollow noopener" target="_blank"><i class="fab fa-github"></i> Code</a>
+                  </div>
+                </td>
+              </tr>
+            </td>
+          </tr>
+        </table>
+
+        <!--Abstract---------------------------------------------->
+        <table id="abstract" class="table" align="center" border="0" cellspacing="0" cellpadding="10">
+          <tr class="row">
+            <td class="cell">
+              <h1>Abstract</h1>
+              <p>3D hand poses are an under-explored modality for action recognition. Poses are compact yet informative and can greatly benefit applications with limited compute budgets. However, poses alone offer an incomplete understanding of actions, as they cannot fully capture objects and environments with which humans interact. To efficiently model hand-object interactions, we propose HandFormer, a novel multimodal transformer. HandFormer combines 3D hand poses at a high temporal resolution for fine-grained motion modeling with sparsely sampled RGB frames for encoding scene semantics. Observing the unique characteristics of hand poses, we temporally factorize hand modeling and represent each joint by its short-term trajectories. This factorized pose representation combined with sparse RGB samples is remarkably efficient and achieves high accuracy. Unimodal HandFormer with only hand poses outperforms existing skeleton-based methods at 5x fewer FLOPs. With RGB, we achieve new state-of-the-art performance on Assembly101 and H2O with significant improvements in egocentric action recognition.</p>
+            </td>
+          </tr>
+        </table>
+
+        <!--Teaser Video---------------------------------------------->
+        <table id="teaser" class="table" align="center" border="0" cellspacing="0" cellpadding="10">
+          <tr class="row">
+            <td class="cell">
+                <tr class="teaser-video" align="center">
+                  <td>
+                    <figure><img src="images/teaser.png" alt="teaser" width="95%"></figure>
+                  </td>
+                </tr>
+            </td>
+          </tr>
+        </table>
+
+        <!--Method---------------------------------------------->
+        <table id="method" class="table" align="center" border="0" cellspacing="0" cellpadding="10">
+          <tr class="row">
+            <td class="cell">
+              <h1>Method</h1>
+              <tr class="teaser-video" align="center">
+                  <td>
+                    <figure><img src="images/method.png" alt="method" width="90%"></figure>
+                  </td>
+                </tr>
+            </td>
+          </tr>
+        </table>
+
+        <!--Citation---------------------------------------------->
+        <!--table id="citation" class="table" align="right" border="0" cellspacing="0" cellpadding="10">
+          <tr class="row">
+            <td class="cell">
+              <h1 >Citation</h1>
+              <div class="citation-box">
+                <pre><code>@inproceedings{shamil2024,
+          title={Opening the Vocabulary of Egocentric Actions},
+          author={Chatterjee, Dibyadip and Sener, Fadime and Ma, Shugao and Yao, Angela},
+          booktitle={Thirty-seventh Conference on Neural Information Processing Systems},
+          year={2023}
+        }</code></pre>
+              </div>
+            </td>
+          </tr>
+        </table-->
+
+        <footer class='footnote'>
+          <p>&copy; <script>document.write( new Date().getFullYear() );</script> Md Salman Shamil. All rights reserved.</p>
+        </footer>
+      </td>
+    </tr>
+  </table>
+
+</body>
+</html>
