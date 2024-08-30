@@ -32,8 +32,7 @@ class HF_PoseRGB(nn.Module):
                  trajectory_atten_dim_per_head=4, trajectory_tcn_kernel_size=3, trajectory_tcn_stride=[1,2,2], trajectory_tcn_dilations=[1,2],
                  use_global_wrist_reference=True, include_orientation_in_global_wrist_ref=True, use_both_wrists=True, separate_hands=True,
                  tf_heads=8, tf_layers=2,
-                 rgb_input_feat_dim=2048, MIB_block=True,
-                 modality='both', rgb_frames_to_use=-1 # -1: Use 1 rgb per microaction for all microactions
+                 rgb_input_feat_dim=2048, MIB_block=True, modality='both', rgb_frames_to_use=-1 # -1: Use 1 rgb per microaction for all microactions
                  ):
         super().__init__()
 
@@ -122,7 +121,7 @@ class HF_PoseRGB(nn.Module):
        
     
         if return_atten_map:
-            summary, summary_v, summary_n, attn_map = self.posergb_tf(maction_feat_for_tf, return_atten_map)
+            summary, summary_v, summary_n, atten_map = self.posergb_tf(maction_feat_for_tf, return_atten_map)
         else:
             summary, summary_v, summary_n = self.posergb_tf(maction_feat_for_tf)                
         out = self.classifier(summary)
@@ -130,7 +129,7 @@ class HF_PoseRGB(nn.Module):
         out_noun = self.classifier_noun(summary_n)
         
         if return_atten_map:
-            return out, out_verb, out_noun, l1_loss.unsqueeze(0), attn_map
+            return out, out_verb, out_noun, l1_loss.unsqueeze(0), atten_map
         else:
             return out, out_verb, out_noun, l1_loss.unsqueeze(0)
 

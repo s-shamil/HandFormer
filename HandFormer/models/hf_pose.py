@@ -165,14 +165,14 @@ class HF_Pose(nn.Module):
         
         if return_atten_map:
             out = self.pose_tf(out_all, return_atten_map=return_atten_map)
-            out, attn_map = out
+            out, atten_map = out
         else:
             out = self.pose_tf(out_all)
 
         out = self.classifier(out)
 
         if return_atten_map:
-            return out, attn_map
+            return out, atten_map
         else:
             return out
 

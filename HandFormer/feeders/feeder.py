@@ -51,7 +51,7 @@ class Feeder(Dataset):
         :param p_interval: Used when sampling strategy is 'crop_and_resize'. Can be either a float (p) or a pair.
                             - if pair, a float (p) is sampled from the interval
                             - p <= 1, crop and keep p% of the video with random offset
-        :param rgb_feature_source: tsm / dino / resnet / none
+        :param rgb_feature_source: tsm / dino / resnet / tsm_ego_e4 / tsm_ego_e3 / none
         :param crop_scale: full / cropped / both. For DINOv2, hand crop and/or full image as input.
         :param rgb_sampling_within_window: first / mid / random. Sampling strategy for RGB frames within the micro-action window.
         :param pose_fps: frame rate of the pose data. From 60 to 15 fps, no decrease in performance was observed.
@@ -241,7 +241,6 @@ class Feeder(Dataset):
             offset = (min_idx + np.random.randint(init_T)) if init_T>0 else min_idx
             selected_indices_vid = np.array([offset+int(i*interval) for i in range(self.sample_cnt_vid)])
 
-        D_feature = 1536 if self.rgb_feature_source=='dino' else 2048
         D_feature = 1536 if self.rgb_feature_source=='dino' else 2048        
 
         rgb_data_numpy = np.zeros((SAMPLE_CNT_VID, D_feature), dtype=np.float32)

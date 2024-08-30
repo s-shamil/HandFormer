@@ -1,0 +1,130 @@
+work_dir: /home/salman/HandFormer_Assembly101/work_dirs/handformer_B21x8/
+
+mixed: False # Enable mixed precision for faster training
+
+# dataset -- feeder -- Assembly101
+feeder: feeders.feeder.Feeder
+# Training
+train_feeder_args:
+  data_path: /home/salman/Assembly101_AR_fusion_data/data/HAND_GCN/RAW_contex30_thresh0/
+  rgb_data_path: /home/salman/Assembly101_AR_fusion_data/data/HAND_VID/RAW_contex30_thresh0/
+  label_path: /home/salman/Assembly101_AR_fusion_data/data/Label_contex30_thresh0/
+  split_name: train
+  target_type: action # 'action' (1380 classes) or 'verb' (24 classes) or 'noun' (90 classes)
+  pose_fps: 60 # Pose frames per sec. Can reduce until 15 without compromising accuracy. Frames taken across the whole clip.
+  sample_cnt_pose: 120 # Number of pose frames used in the model.
+  sample_cnt_vid: 8 # Number of RGB frames to sample from the video.
+  p_interval: [0.70,1.0] # Used for augmentation by temporal crop.
+  sampling_strategy: crop_and_resize # 'default' or 'crop_and_resize'; 'default': uniform sampling (+zero pad or trim),'crop_and_resize': fixed fps sampling, then temporal interpolation.
+  rgb_feature_source: dino # tsm / dino / resnet / tsm_ego_e4 / tsm_ego_e3 / none
+  crop_scale: both # full / cropped / both
+  rgb_sampling_within_window: first # first/mid/random. 
+  debug: False
+# Test or Validation
+test_feeder_args:
+  data_path: /home/salman/Assembly101_AR_fusion_data/data/HAND_GCN/RAW_contex30_thresh0/
+  rgb_data_path: /home/salman/Assembly101_AR_fusion_data/data/HAND_VID/RAW_contex30_thresh0/
+  label_path: /home/salman/Assembly101_AR_fusion_data/data/Label_contex30_thresh0/
+  split_name: validation
+  target_type: action # 'action' (1380 classes) or 'verb' (24 classes) or 'noun' (90 classes)
+  pose_fps: 60 # Pose frames per sec. Can reduce until 15 without compromising accuracy. Frames taken across the whole clip.
+  sample_cnt_pose: 120 # Number of pose frames used in the model.
+  sample_cnt_vid: 8 # Number of RGB frames to sample from the video.
+  p_interval: [0.85]
+  sampling_strategy: crop_and_resize # 'default' or 'crop_and_resize'; 'default': uniform sampling (+zero pad or trim),'crop_and_resize': fixed fps sampling, then temporal interpolation.
+  rgb_feature_source: dino # tsm / dino / resnet / tsm_ego_e4 / tsm_ego_e3 / none
+  crop_scale: both # full / cropped / both
+  rgb_sampling_within_window: first # first/mid/random. 
+  debug: False
+
+
+loss: LabelSmoothingCrossEntropy # CrossEntropy or LabelSmoothingCrossEntropy
+loss_args:
+  smoothing: 0.1
+  temperature: 1.1
+
+
+# # Pose-only variant with overlapping microactions
+# model: models.hf_pose.HF_Pose
+# model_args:
+#   microaction_window_size: 15
+#   num_joints: 21 # 21 or 11 or 6
+#   num_classes: 1380 # For HF_PoseRGB: #actions. For HF_Pose: it can be #verbs, change target_type in feeders accordingly.
+
+#   embedding_dim_final: 256
+#   use_2d_pose: False
+#   dropout: 0.2
+#   microaction_overlap: 0.5
+  
+#   trajectory_atten_dim_per_head: 4
+#   trajectory_tcn_kernel_size: 3
+#   trajectory_tcn_stride: [1,2,2]
+#   trajectory_tcn_dilations: [1,2]
+
+#   use_global_wrist_reference: True
+#   include_orientation_in_global_wrist_ref: True
+#   use_both_wrists: True
+#   separate_hands: True
+
+#   tf_heads: 8
+#   tf_layers: 2
+
+
+# Pose + RGB variant with non-overlapping microactions
+model: models.hf_posergb.HF_PoseRGB
+model_args:
+  microaction_window_size: 15
+  num_joints: 21 # 21 or 11 or 6
+  num_classes: 1380 # For HF_PoseRGB: #actions. For HF_Pose: it can be #verbs, change target_type in feeders accordingly.
+  num_verbs: 24
+  num_nouns: 90
+
+  embedding_dim_final: 256
+  use_2d_pose: False
+  dropout: 0.2
+  
+  trajectory_atten_dim_per_head: 4
+  trajectory_tcn_kernel_size: 3
+  trajectory_tcn_stride: [1,2,2]
+  trajectory_tcn_dilations: [1,2]
+
+  use_global_wrist_reference: True
+  include_orientation_in_global_wrist_ref: True
+  use_both_wrists: True
+  separate_hands: True
+
+  tf_heads: 8
+  tf_layers: 2
+
+  rgb_input_feat_dim: 1536 # for DINO: 1536, for TSM: 2048. Must be consistent with the feature source in feeder.
+  MIB_block: True
+  modality: both
+  rgb_frames_to_use: -1 # -1 for all frames; Implemented for 1, 2, 4 also.
+
+# optimization parameters
+optimizer: SGD
+weight_decay: 0.0005
+base_lr: 0.025  # 0.025 #  0.001 # 0.025 # 0.01 # 0.025 # 0.05 # 0.025 # 0.01 # 0.05 # 0.01 # weighted outs: 0.2
+nesterov: True
+step: [25,40]
+num_epoch: 50
+warm_up_epoch: 5
+lr_decay_rate: 0.1
+
+# training
+device: [0,1]
+num_worker: 12
+batch_size: 32
+forward_batch_size: 32
+test_batch_size: 32
+
+# Additional losses apart from the primary loss 
+add_verb_loss: True # In case of verb recognition with HF_Pose, this should stay False as the primary loss will be calculated on verbs.
+add_noun_loss: True
+add_feat_loss: True
+
+# Loss components. Put 0 for
+action_loss_weight: 1.0
+verb_loss_weight: 1.0 # 0 for HF_Pose. 1.0 for HF_PoseRGB
+noun_loss_weight: 1.0 # 0 for HF_Pose. 1.0 for HF_PoseRGB
+feat_loss_weight: 2.0 # 0 for HF_Pose. 2.0 for HF_PoseRGB
