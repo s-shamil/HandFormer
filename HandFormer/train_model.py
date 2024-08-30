@@ -9,7 +9,6 @@ import shutil
 import inspect
 import argparse
 from collections import OrderedDict, defaultdict
-import sys
 
 import torch
 import numpy as np
@@ -55,7 +54,7 @@ def get_parser():
     parser.add_argument('--show-topk', type=int, default=[1], nargs='+', help='which Top K accuracy will be shown')
 
     parser.add_argument('--feeder', default='feeders.feeder', help='data loader will be used')
-    parser.add_argument('--num-worker', type=int, default=8, help='the number of worker for data loader') # os.cpu_count()
+    parser.add_argument('--num-worker', type=int, default=8, help='the number of worker for data loader')
     parser.add_argument('--train-feeder-args', default=dict(), help='the arguments of data loader for training')
     parser.add_argument('--test-feeder-args', default=dict(), help='the arguments of data loader for test')
 
@@ -179,7 +178,7 @@ class Processor():
             Store reference to copies of the weight tensors on CUDA memory along with the keys in the dictionary
             """
             weights = OrderedDict(
-                [[k.split('module.')[-1], # Question: Not sure what this module split does. Found no key that contains module as substring
+                [[k.split('module.')[-1],
                   v.cuda(output_device)] for k, v in weights.items()])
             
             """ 
