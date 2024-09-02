@@ -2,7 +2,9 @@
 
 PyTorch implementation of "**On the Utility of 3D Hand Poses for Action Recognition**", ECCV 2024.
 
-[[arXiv](https://arxiv.org/pdf/2403.09805)][[Project Page](https://s-shamil.github.io/HandFormer/)]
+[<img src="https://img.shields.io/badge/arXiv-2403.09805-orange" alt="arXiv Paper" width="auto" height="32">](https://arxiv.org/pdf/2403.09805)
+[<img src="https://img.shields.io/badge/Project%20Page-HandFormer-blue" alt="Project Page" width="auto" height="32">](https://s-shamil.github.io/HandFormer/)
+
 
 <img src="docs/images/teaser.png" width="90%">
 
