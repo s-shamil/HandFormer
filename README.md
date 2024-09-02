@@ -13,6 +13,35 @@ PyTorch implementation of "**On the Utility of 3D Hand Poses for Action Recognit
 
 ## Requirements
 
+### Data Sources
+
+#### [Assembly101](https://assembly-101.github.io/)
+
+**Poses**
+
+Download **AssemblyPoses.zip** from [here](https://drive.google.com/drive/folders/1nh8PHwEw04zxkkkKlfm4fsR3IPEDvLKj?usp=drive_link). For access, follow the instructions from [Assembly101 official repo](https://github.com/assembly-101/assembly101-download-scripts).
+
+```
+$ unzip AssemblyPoses.zip -d /<path_to_your_data_dir>/assembly101_poses/
+```
+
+**RGB**
+
+For experiments with RGB, we provide [DINOv2](https://github.com/facebookresearch/dinov2) features for `view 4` (Camera ID: `C10119_rgb`) of Assembly101 [here](https://drive.google.com/drive/folders/1nh8PHwEw04zxkkkKlfm4fsR3IPEDvLKj?usp=drive_link).
+
+Alternatively, TSM features for any of the views can be downloaded from the same [directory](https://drive.google.com/drive/folders/1nh8PHwEw04zxkkkKlfm4fsR3IPEDvLKj?usp=drive_link).
+
+Frame-wise TSM or DINOv2 features are stored as [lmdb](https://lmdb.readthedocs.io/en/release/) files.
+
+**Annotations**
+
+Download the CSV files from [fine-grained annotations](https://drive.google.com/drive/folders/1G1o9rTf1W5V4Q4ZSJfG2XAz0esmrwZ0g?usp=drive_link) and put them into `<path_to_your_data_dir>/Assembly101_FG_annotations/`.
+
+Details about the annotations can be found [here](https://github.com/assembly-101/assembly101-annotations/tree/main/fine-grained-annotations).
+
+
+#### [H2O](https://github.com/taeinkwon/h2odataset) $${\color{green}\text{Coming soon...}}$$
+
 ### Environment
 
 Create a conda environment with the necessary packages.
@@ -20,14 +49,8 @@ Create a conda environment with the necessary packages.
 $ conda create -n handformer_env --file package_list.txt
 ```
 
-### Data Preprocessing
 
-#### Assembly101
-Download **AssemblyPoses.zip** from [here](https://drive.google.com/drive/folders/1nh8PHwEw04zxkkkKlfm4fsR3IPEDvLKj). For access, follow instructions from the [official Assembly101 repo](https://github.com/assembly-101/assembly101-download-scripts).
-
-```
-$ unzip AssemblyPoses.zip -d /<path_to_your_data_dir>/assembly101_poses/
-```
+### Preprocessing
 
 The parameters and data directories for preprocessing are placed in `Preprocess/config.py`. Follow the instructions there to modify and run the following:
 
@@ -35,23 +58,25 @@ The parameters and data directories for preprocessing are placed in `Preprocess/
 $ python Preprocess/1_get_clip_data.py
 $ python Preprocess/2_get_final_data.py
 ```
-### Data Sources and Preprocessed Data
 
-
-$${\color{red}\text{Coming soon...}}$$
 
 ## Training
 All the parameters and data paths for training are defined and explained in `train_config.yaml`. The parameters are populated with default values. Modify paths (and parameters, if necessary) and run-
+
 ```
 $ python HandFormer/train_model.py
 ```
 
+Both Pose-only and Pose+RGB variants can be found in the configuration file. If RGB is used, `rgb_feature_source` needs to be specified. Additionally, update data paths in `HandFormer/feeders/feeder.py` (within lines 80-115) to refer to the downloaded lmdb files of TSM or DINOv2 features. 
+
 ## Evaluation
 To obtain test scores, simply put additional placeholder columns in `test.csv` to match `train.csv`. 
 Set parameters in `test_config.yaml` and run-
+
 ```
 $ python HandFormer/test_model.py
 ```
+
 Prepare appropriate output file from the saved scores to submit to the evaluation platforms (e.g., [[Assembly101](https://codalab.lisn.upsaclay.fr/competitions/5256)][[H2O](https://codalab.lisn.upsaclay.fr/competitions/4820)].)
 
 ## Acknowledgements
