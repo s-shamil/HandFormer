@@ -24,7 +24,7 @@ $ python Preprocess/1_get_clip_data.py
 $ python Preprocess/2_get_final_data.py
 ```
 ### Data Sources and Preprocessed Data 
-$${\color{red}Coming soon...}$$
+$${\color{red}\text{Coming soon...}}$$
 
 # Training
 Set parameters in train_config.yaml and run `python HandFormer/train_model.py`.
