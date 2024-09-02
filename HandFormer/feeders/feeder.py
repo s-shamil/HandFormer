@@ -251,15 +251,17 @@ class Feeder(Dataset):
                  
                 if self.crop_scale in ['full', 'both']:
                     with self.env_fullImg.begin() as e:
+                        # Full frame TSM or DINO feature
+                        # Change camera name for TSM features if needed
+
                         # if self.rgb_feature_source=='tsm': # use it if any other view than v4 is used
                         #     lmdb_key = lmdb_key.replace('C10119_rgb', 'C10115_rgb')
-
                         if self.rgb_feature_source=='tsm_ego_e4': # if ego view tsm is needed, change the key first
                             lmdb_key = lmdb_key.replace('C10119_rgb', 'HMC_84358933_mono10bit')
                         elif self.rgb_feature_source=='tsm_ego_e3':
                             lmdb_key = lmdb_key.replace('C10119_rgb', 'HMC_84355350_mono10bit')
+                        
                         data = e.get(lmdb_key.strip().encode('utf-8'))
-
                         if data is None:
                             # either actually not found, otherwise camera name is different for the egocentric ones
                             if self.rgb_feature_source=='tsm_ego_e4':
@@ -271,16 +273,21 @@ class Feeder(Dataset):
                                 with self.env_fullImg_2.begin() as e2:
                                     data = e2.get(lmdb_key.strip().encode('utf-8'))
 
+                            # If still not found, write a error log file txt
                             if data is None:
                                 # write a error log file txt
                                 with open('error_log.txt', 'a') as f:
                                     f.write(f'[ERROR] Key {lmdb_key} does not exist !!!\n')
+                            else:
+                                data = np.frombuffer(data, 'float32') # convert to numpy array
+                                rgb_data_numpy[i, :] = data 
                                                             
                         else:
                             data = np.frombuffer(data, 'float32')  # convert to numpy array
                             rgb_data_numpy[i, :] = data
 
                 if self.crop_scale in ['cropped', 'both']:
+                    # Cropped image DINO feature
                     with self.env_croppedImg.begin() as e:
                         data = e.get(lmdb_key.strip().encode('utf-8'))
                         if data is not None:

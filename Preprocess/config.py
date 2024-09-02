@@ -5,7 +5,7 @@ raw_pose_dir = "/mnt/data/salman/assembly101_poses/assembly101_camera_and_hand_p
 camera_pose_dir = "/mnt/data/salman/assembly101_poses/assembly101_camera_and_hand_poses/camera_position_ego/"
 xf_transform_dir = "/mnt/data/salman/assembly101_poses/assembly101_camera_and_hand_poses/xf_transf/"
 camera_name = 'C10119_rgb'
-rgb_frames_root_dir = "" # keep empty for pose-only processing, i.e., rgb not available on machine.
+rgb_frames_root_dir = "" # keep empty if rgb frames are not available on machine. 
 
 annot_dir = '/mnt/data/salman/Assembly101_FG_annotations/'
 out_path_for_handpose = '/mnt/data/salman/Assembly101_AR_fusion_data/data/HAND_GCN/' 

@@ -247,16 +247,15 @@ def main():
             xf_transform_json = xf_transform_dir + vid_file_name + '.json'
             camera_pos_json = camera_pos_dir + vid_file_name + '.json'
 
-            if not POSE_ONLY_FLAG:
-                vid_file_frame_dir = rgb_root_path + vid_file_name + '/'+ CAMERA_NAME + '/'
+            vid_file_frame_dir = vid_file_name + '/'+ CAMERA_NAME + '/'
 
             pose3d_full, skel3d_full = getPose3d(pose3d_json, camera_pos_json)
             xf_trans_full = getXfTransform(xf_transform_json)
 
             if not POSE_ONLY_FLAG:
-                available_rgb_frames = len(os.listdir(vid_file_frame_dir)) # Can discard it if not needed, e.g., for pose only projects
+                available_rgb_frames = len(os.listdir(rgb_root_path + vid_file_frame_dir)) # Can discard it if not needed, e.g., for pose only projects
             else:
-                available_rgb_frames = 0
+                available_rgb_frames = len(pose3d_full) // 2 # Estimated. 60fps pose data, 30fps annotations
 
             print(klk, '/', len(jsons_list_poses), '  - #seg:', len(all_segments), '  - #pose:', len(pose3d_full), '  - #frames:', available_rgb_frames)
 
@@ -271,10 +270,8 @@ def main():
                 # 30 fps annotation is used.
                 # Safe indexing to avoid error. --> Start 1-indexed. End 0-indexed
                 start_f = max(1, segment['start_frame'] - contex_val) # Adjust start_frame with context
-                if not POSE_ONLY_FLAG:
-                    end_f = min(segment['end_frame'] + contex_val + 1, available_rgb_frames) # Adjust end_frame with context
-                else:
-                    end_f = segment['end_frame'] + contex_val + 1 # No RGB information, so keep looking for pose frames.
+                end_f = min(segment['end_frame'] + contex_val + 1, available_rgb_frames) # Adjust end_frame with context
+                
                 for img_index in range(start_f, end_f, 1):
                     # Dealing with 60 fps pose data with 30fps annotations
                     pose_ended = False
@@ -307,10 +304,9 @@ def main():
                         skeletons_seg.append(skeleton3d)
                         xf_trans_seg.append(xf_trans_twoHands)
 
-                    if not POSE_ONLY_FLAG:
-                        # Retrieve the rgb frame
-                        frame_path = vid_file_frame_dir + CAMERA_NAME + "_{:010d}".format(img_index) + '.jpg'
-                        rgb_frame_paths.append(frame_path)
+                    # Append the rgb frame
+                    frame_path = vid_file_frame_dir + CAMERA_NAME + "_{:010d}".format(img_index) + '.jpg'
+                    rgb_frame_paths.append(frame_path)
                     
                     if pose_ended:
                         break
