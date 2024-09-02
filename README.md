@@ -4,7 +4,9 @@ PyTorch implementation of "**On the Utility of 3D Hand Poses for Action Recognit
 
 [<img src="https://img.shields.io/badge/arXiv-2403.09805-orange" alt="arXiv Paper">](https://arxiv.org/pdf/2403.09805)
 [<img src="https://img.shields.io/badge/Project%20Page-HandFormer-blue" alt="Project Page">](https://s-shamil.github.io/HandFormer/)
+
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/on-the-utility-of-3d-hand-poses-for-action/3d-action-recognition-on-assembly101)](https://paperswithcode.com/sota/3d-action-recognition-on-assembly101?p=on-the-utility-of-3d-hand-poses-for-action)
+[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/on-the-utility-of-3d-hand-poses-for-action/action-recognition-on-h2o-2-hands-and-objects)](https://paperswithcode.com/sota/action-recognition-on-h2o-2-hands-and-objects?p=on-the-utility-of-3d-hand-poses-for-action)
 
 
 <img src="docs/images/teaser.png" width="90%">
