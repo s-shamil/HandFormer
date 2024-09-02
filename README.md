@@ -14,7 +14,7 @@ PyTorch implementation of "**On the Utility of 3D Hand Poses for Action Recognit
 
 Create a conda environment with the necessary packages.
 ```
-$ conda create -n handformer_env --file package-list.txt
+$ conda create -n handformer_env --file package_list.txt
 ```
 
 ### Data Preprocessing
