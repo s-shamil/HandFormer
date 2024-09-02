@@ -22,13 +22,22 @@ $ conda create -n handformer_env --file package_list.txt
 
 ### Data Preprocessing
 
+#### Assembly101
+Download **AssemblyPoses.zip** from [here](https://drive.google.com/drive/folders/1nh8PHwEw04zxkkkKlfm4fsR3IPEDvLKj). For access, follow instructions from the [official Assembly101 repo](https://github.com/assembly-101/assembly101-download-scripts).
+
+```
+$ unzip AssemblyPoses.zip -d /<path_to_your_data_dir>/assembly101_poses/
+```
+
 The parameters and data directories for preprocessing are placed in `Preprocess/config.py`. Follow the instructions there to modify and run the following:
 
 ```
 $ python Preprocess/1_get_clip_data.py
 $ python Preprocess/2_get_final_data.py
 ```
-### Data Sources and Preprocessed Data 
+### Data Sources and Preprocessed Data
+
+
 $${\color{red}\text{Coming soon...}}$$
 
 ## Training
