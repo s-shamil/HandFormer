@@ -39,7 +39,7 @@ $ python HandFormer/train_model.py
 To obtain test scores, simply put additional placeholder columns in `test.csv` to match `train.csv`. 
 Set parameters in `test_config.yaml` and run-
 ```
-python HandFormer/test_model.py
+$ python HandFormer/test_model.py
 ```
 Prepare appropriate output file from the saved scores to submit to the evaluation platforms (e.g., [[Assembly101](https://codalab.lisn.upsaclay.fr/competitions/5256)][[H2O](https://codalab.lisn.upsaclay.fr/competitions/4820)].)
 
