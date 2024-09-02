@@ -27,7 +27,9 @@ $ python Preprocess/2_get_final_data.py
 $${\color{red}\text{Coming soon...}}$$
 
 # Training
-Set parameters in train_config.yaml and run `python HandFormer/train_model.py`.
+Set parameters in `train_config.yaml` and run `python HandFormer/train_model.py`.
+
+To obtain test scores, simply put additional placeholder columns in `test.csv` to match `train.csv`. Prepare appropriate output file from the saved scores to submit to the evaluation platforms (e.g., [[Assembly101](https://codalab.lisn.upsaclay.fr/competitions/5256)][[H2O](https://codalab.lisn.upsaclay.fr/competitions/4820)].)
 
 # Acknowledgements
 This repository is based on
