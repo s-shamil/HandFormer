@@ -8,7 +8,7 @@ PyTorch implementation of "**On the Utility of 3D Hand Poses for Action Recognit
 
 <img src="docs/images/teaser.png" width="90%">
 
-# Requirements
+## Requirements
 
 ### Environment
 
@@ -28,19 +28,23 @@ $ python Preprocess/2_get_final_data.py
 ### Data Sources and Preprocessed Data 
 $${\color{red}\text{Coming soon...}}$$
 
-# Training
+## Training
 Set parameters in `train_config.yaml` and run `python HandFormer/train_model.py`.
 
-To obtain test scores, simply put additional placeholder columns in `test.csv` to match `train.csv`. Prepare appropriate output file from the saved scores to submit to the evaluation platforms (e.g., [[Assembly101](https://codalab.lisn.upsaclay.fr/competitions/5256)][[H2O](https://codalab.lisn.upsaclay.fr/competitions/4820)].)
+## Evaluation
+To obtain test scores, simply put additional placeholder columns in `test.csv` to match `train.csv`. 
+Set parameters in `test_config.yaml` and run `python HandFormer/test_model.py`.
+Prepare appropriate output file from the saved scores to submit to the evaluation platforms (e.g., [[Assembly101](https://codalab.lisn.upsaclay.fr/competitions/5256)][[H2O](https://codalab.lisn.upsaclay.fr/competitions/4820)].)
 
-# Acknowledgements
+## Acknowledgements
 This repository is based on
-* [[Assembly101](https://github.com/assembly-101/assembly101-action-recognition)]
-* [[MS-G3D](https://github.com/kenziyuliu/MS-G3D)]
-* [[ISTA-Net](https://github.com/Necolizer/ISTA-Net/)]
-* [[HTT](https://github.com/fylwen/HTT)]
+* [Assembly101](https://github.com/assembly-101/assembly101-action-recognition)
+* [MS-G3D](https://github.com/kenziyuliu/MS-G3D)
+* [ISTA-Net](https://github.com/Necolizer/ISTA-Net/)
+* [HTT](https://github.com/fylwen/HTT)
+Thanks for their great work!
 
-# Citation
+## Citation
 Please cite this work if you find it useful:
 ```
 @article{shamil2024utility,
