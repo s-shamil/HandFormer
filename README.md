@@ -2,8 +2,9 @@
 
 PyTorch implementation of "**On the Utility of 3D Hand Poses for Action Recognition**", ECCV 2024.
 
-[<img src="https://img.shields.io/badge/arXiv-2403.09805-orange" alt="arXiv Paper" width="auto" height="32">](https://arxiv.org/pdf/2403.09805)
-[<img src="https://img.shields.io/badge/Project%20Page-HandFormer-blue" alt="Project Page" width="auto" height="32">](https://s-shamil.github.io/HandFormer/)
+[<img src="https://img.shields.io/badge/arXiv-2403.09805-orange" alt="arXiv Paper">](https://arxiv.org/pdf/2403.09805)
+[<img src="https://img.shields.io/badge/Project%20Page-HandFormer-blue" alt="Project Page">](https://s-shamil.github.io/HandFormer/)
+[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/on-the-utility-of-3d-hand-poses-for-action/3d-action-recognition-on-assembly101)](https://paperswithcode.com/sota/3d-action-recognition-on-assembly101?p=on-the-utility-of-3d-hand-poses-for-action)
 
 
 <img src="docs/images/teaser.png" width="90%">
@@ -19,7 +20,7 @@ $ conda create -n handformer_env --file package_list.txt
 
 ### Data Preprocessing
 
-Set the parameters and data directories in `Preprocess/config.py` and run the following:
+The parameters and data directories for preprocessing are placed in `Preprocess/config.py`. Follow the instructions there to modify and run the following:
 
 ```
 $ python Preprocess/1_get_clip_data.py
@@ -29,11 +30,15 @@ $ python Preprocess/2_get_final_data.py
 $${\color{red}\text{Coming soon...}}$$
 
 ## Training
-Set parameters in `train_config.yaml` and run `python HandFormer/train_model.py`.
+All the parameters and data paths for training are defined and explained in `train_config.yaml`. The parameters are populated with default values. Modify paths (and parameters, if necessary) and run-
+```
+$ python HandFormer/train_model.py
+```
 
 ## Evaluation
 To obtain test scores, simply put additional placeholder columns in `test.csv` to match `train.csv`. 
-Set parameters in `test_config.yaml` and run `python HandFormer/test_model.py`.
+Set parameters in `test_config.yaml` and run-
+```python HandFormer/test_model.py```
 Prepare appropriate output file from the saved scores to submit to the evaluation platforms (e.g., [[Assembly101](https://codalab.lisn.upsaclay.fr/competitions/5256)][[H2O](https://codalab.lisn.upsaclay.fr/competitions/4820)].)
 
 ## Acknowledgements
