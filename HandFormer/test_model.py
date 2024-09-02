@@ -44,7 +44,7 @@ def get_parser():
     parser.add_argument('--assume-yes', default=False, help='Say yes to every prompt')
     parser.add_argument('--mixed', default=False, help='Use mixed precision training')
 
-    parser.add_argument('--config', default='train_config.yaml',help='path to the configuration file')
+    parser.add_argument('--config', default='test_config.yaml',help='path to the configuration file')
     parser.add_argument('--save-score', type=str2bool, default=True,help='if ture, the classification score will be stored')
     parser.add_argument('--seed', type=int, default=random.randrange(200), help='random seed')
     parser.add_argument('--log-interval', type=int, default=100, help='the interval for printing messages (#iteration)')
@@ -295,7 +295,9 @@ def str2bool(v):
 def main():
     parser = get_parser()
     # HandFormer code directory
-    main_dir = "/home/salman/HandFormer/HandFormer/"
+    # main_dir = "/home/salman/HandFormer/HandFormer/"
+    # or get this file's directory
+    main_dir = os.path.dirname(os.path.realpath(__file__))  + '/'
     # load arg form config file
     p = parser.parse_args()
     if p.config is not None:

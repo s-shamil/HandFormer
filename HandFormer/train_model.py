@@ -668,7 +668,9 @@ def str2bool(v):
 def main():
     parser = get_parser()
     # HandFormer code directory
-    main_dir = "/home/salman/HandFormer/HandFormer/"
+    # main_dir = "/home/salman/HandFormer/HandFormer/"
+    # or get this file's directory
+    main_dir = os.path.dirname(os.path.realpath(__file__))  + '/'
     # load arg form config file
     p = parser.parse_args()
     if p.config is not None:

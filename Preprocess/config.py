@@ -1,4 +1,4 @@
-num_frames_in_each_context = 15 # 15 frames (at 30fps) will add 0.5+0.5=1 seconds of context in total. Use 30 for 2 seconds of context in total. 
+num_frames_in_each_context = 30 # e.g., 15 frames (at 30fps) will add 0.5+0.5=1 seconds of context in total. Use 30 for 2 seconds of context in total. 
 handpose_min_confidence = 0.0 # Minimum confidence value to include a handpose frame in the list
 
 raw_pose_dir = "/mnt/data/salman/assembly101_poses/assembly101_camera_and_hand_poses/landmarks3D/"
