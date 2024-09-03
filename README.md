@@ -27,7 +27,7 @@ $ unzip AssemblyPoses.zip -d /<path_to_your_data_dir>/assembly101_poses/
 
 **RGB**
 
-For experiments with RGB, we provide [DINOv2](https://github.com/facebookresearch/dinov2) features for `view 4` (Camera ID: `C10119_rgb`) of Assembly101 [here](https://drive.google.com/drive/folders/1nh8PHwEw04zxkkkKlfm4fsR3IPEDvLKj?usp=drive_link).
+For experiments with RGB, we provide [DINOv2](https://github.com/facebookresearch/dinov2) features (at 30fps) for `view 4` (Camera ID: `C10119_rgb`) of Assembly101 [here](https://drive.google.com/drive/folders/1nh8PHwEw04zxkkkKlfm4fsR3IPEDvLKj?usp=drive_link).
 
 Alternatively, TSM features for any of the views can be downloaded from the same [directory](https://drive.google.com/drive/folders/1nh8PHwEw04zxkkkKlfm4fsR3IPEDvLKj?usp=drive_link).
 
