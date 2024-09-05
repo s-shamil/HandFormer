@@ -46,7 +46,7 @@ Details about the annotations can be found [here](https://github.com/assembly-10
 
 Create a conda environment with the necessary packages.
 ```
-$ conda create -n handformer_env --file package_list.txt
+$ conda env create -f package_list.yml -n handformer_env
 ```
 
 
