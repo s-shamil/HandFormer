@@ -336,8 +336,7 @@ def main():
                     # Output file name with segment name and action name
                     save_pose_file = pose_save_out + '/' + seg_name + '_' + segment['action_cls'].replace(' ', '_') + '.pkl'
                     save_skeleton_file = skeleton_save_out + '/' + seg_name + '_' + segment['action_cls'].replace(' ', '_') + '.pkl'
-                    if not POSE_ONLY_FLAG:
-                        save_vid_file = vid_save_out + '/' + seg_name + '_' + segment['action_cls'].replace(' ', '_') + '.pkl'
+                    save_vid_file = vid_save_out + '/' + seg_name + '_' + segment['action_cls'].replace(' ', '_') + '.pkl'
                     
                     # Dump the (3, T, 21, 2) sized numpy array for handposes for each segment
                     with open(save_pose_file, 'wb') as handle:
@@ -347,10 +346,9 @@ def main():
                     with open(save_skeleton_file, 'wb') as handle:
                         pickle.dump(skeletons_seg_s, handle, protocol=pickle.HIGHEST_PROTOCOL)
 
-                    if not POSE_ONLY_FLAG:
-                        # Dump the (T_,) sized list of rgb paths
-                        with open(save_vid_file, 'wb') as handle:
-                            pickle.dump(rgb_frame_paths, handle, protocol=pickle.HIGHEST_PROTOCOL)
+                    # Dump the (T_,) sized list of rgb paths. If POSE_ONLY_FLAG is true, the frames indices are not checked for availability in RGB source.
+                    with open(save_vid_file, 'wb') as handle:
+                        pickle.dump(rgb_frame_paths, handle, protocol=pickle.HIGHEST_PROTOCOL)
 
                     max_frame.append(hand_joints_seg_s.shape[1]) # Segment wise frame count
                     counter_instances += 1
