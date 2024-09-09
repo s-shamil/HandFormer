@@ -85,10 +85,8 @@ def get_xf_transformed_data(landmarks, xf_transforms):
     ref_to_world_xf = inverse_xf(xf_transforms)
     ref_to_world_xf = ref_to_world_xf.unsqueeze(3).repeat(1, 1, 1, H, 1, 1) # repeat the pair for all 21 joints
     # flatten ref_to_world_xf
-    ref_to_world_xf = ref_to_world_xf_new.view(-1, 4, 4)
-    ref_to_world_xf_new = ref_to_world_xf_new.view(-1, 4, 4)
-    # apply transformation to landmarks
     ref_transf_flat = ref_to_world_xf.view(-1, 4, 4)
+    # apply transformation to landmarks
     x_ref = ref_transf_flat @ x_flat
     x_ref = x_ref[..., :3, 0].view(B, T, N, H, 3)
 
