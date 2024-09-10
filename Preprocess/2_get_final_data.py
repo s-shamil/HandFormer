@@ -78,6 +78,6 @@ if __name__ == '__main__':
     for p in part:
         data_path_ = os.path.join(data_path, p)
         skel_data_path_ = os.path.join(skel_data_path, p)
-        rgb_data_path_ = os.path.join(rgb_data_path, p)
+        rgb_data_path_ = os.path.join(rgb_data_path, p) if rgb_data_path is not None else None
         # Generate data for the split
         gendata(data_path_, skel_data_path_, rgb_data_path_, out_label_path, part=p)
