@@ -221,31 +221,31 @@ class Feeder(Dataset):
             
         pose_data_tensor = torch.from_numpy(data_numpy)
 
-        # Pose data retrieved. Now move on to video tensor.
-        path_to_jpg_list = self.rgb_data_path + self.split_name + '/' + self.sample_name[index]
-        with open(path_to_jpg_list, 'rb') as f:
-            jpg_list = pickle.load(f)
         
-        ### Pick RGB frames based on the selected pose indices ###
-        min_idx = selected_indices_pose[0]//2 # 60fps to 30 fps
-        max_idx = selected_indices_pose[-1]//2
-        interval = (max_idx-min_idx) / self.sample_cnt_vid # Preserve as float for better alignment
-
-        if self.rgb_sampling_within_window=='first':
-            selected_indices_vid = np.array([min_idx+int(i*interval) for i in range(self.sample_cnt_vid)])
-        elif self.rgb_sampling_within_window=='mid':
-            offset = min_idx + int(interval/2)
-            selected_indices_vid = np.array([offset+int(i*interval) for i in range(self.sample_cnt_vid)])
-        elif self.rgb_sampling_within_window=='random':
-            init_T = int(interval)
-            offset = (min_idx + np.random.randint(init_T)) if init_T>0 else min_idx
-            selected_indices_vid = np.array([offset+int(i*interval) for i in range(self.sample_cnt_vid)])
-
         D_feature = 1536 if self.rgb_feature_source=='dino' else 2048        
-
         rgb_data_numpy = np.zeros((SAMPLE_CNT_VID, D_feature), dtype=np.float32)
 
         if self.rgb_feature_source!='none': # Do not bother looking for RGB data in pose-only experiments
+            # Pose data retrieved. Now move on to video tensor.
+            path_to_jpg_list = self.rgb_data_path + self.split_name + '/' + self.sample_name[index]
+            with open(path_to_jpg_list, 'rb') as f:
+                jpg_list = pickle.load(f)
+            
+            ### Pick RGB frames based on the selected pose indices ###
+            min_idx = selected_indices_pose[0]//2 # 60fps to 30 fps
+            max_idx = selected_indices_pose[-1]//2
+            interval = (max_idx-min_idx) / self.sample_cnt_vid # Preserve as float for better alignment
+    
+            if self.rgb_sampling_within_window=='first':
+                selected_indices_vid = np.array([min_idx+int(i*interval) for i in range(self.sample_cnt_vid)])
+            elif self.rgb_sampling_within_window=='mid':
+                offset = min_idx + int(interval/2)
+                selected_indices_vid = np.array([offset+int(i*interval) for i in range(self.sample_cnt_vid)])
+            elif self.rgb_sampling_within_window=='random':
+                init_T = int(interval)
+                offset = (min_idx + np.random.randint(init_T)) if init_T>0 else min_idx
+                selected_indices_vid = np.array([offset+int(i*interval) for i in range(self.sample_cnt_vid)])
+
             for i in range(len(selected_indices_vid)):
                 lmdb_key = jpg_list[selected_indices_vid[i]]
                  
@@ -303,11 +303,11 @@ class Feeder(Dataset):
 
         # If the target is verb (noun), return verb (noun) label in place of the action label for easy evaluation.    
         if self.target_type=='verb':
-            return pose_data_tensor, rgb_data_tensor, verb_label, verb_label, noun_label, index, total_pose_frames
+            return pose_data_tensor, rgb_data_tensor, verb_label, verb_label, noun_label, index
         elif self.target_type=='noun':
-            return pose_data_tensor, rgb_data_tensor, noun_label, verb_label, noun_label, index, total_pose_frames
+            return pose_data_tensor, rgb_data_tensor, noun_label, verb_label, noun_label, index
         else:
-            return pose_data_tensor, rgb_data_tensor, label, verb_label, noun_label, index, total_pose_frames    
+            return pose_data_tensor, rgb_data_tensor, label, verb_label, noun_label, index    
 
 
     def top_k(self, score, top_k):
