@@ -91,10 +91,12 @@ Thanks for their great work!
 ## Citation
 Please cite this work if you find it useful:
 ```
-@article{shamil2024utility,
+@inproceedings{shamil2025utility,
   title={On the Utility of 3D Hand Poses for Action Recognition},
   author={Shamil, Md Salman and Chatterjee, Dibyadip and Sener, Fadime and Ma, Shugao and Yao, Angela},
-  journal={arXiv preprint arXiv:2403.09805},
-  year={2024}
+  booktitle={European Conference on Computer Vision},
+  pages={436--454},
+  year={2025},
+  organization={Springer}
 }
 ```
