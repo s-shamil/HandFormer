@@ -527,7 +527,7 @@ class Processor():
                     noun_label = noun_label.long().cuda(self.output_device)
 
                     # forward
-                    output = self.model(data, rgb_data, label)
+                    output = self.model(data, rgb_data)
                     if not isinstance(output, tuple): # If not tuple, then no other loss
                         feat_loss = 0
                     else:
