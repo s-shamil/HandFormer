@@ -40,8 +40,6 @@ Download the CSV files from [fine-grained annotations](https://drive.google.com/
 Details about the annotations can be found [here](https://github.com/assembly-101/assembly101-annotations/tree/main/fine-grained-annotations).
 
 
-#### [H2O](https://github.com/taeinkwon/h2odataset) $${\color{green}\text{Coming soon...}}$$
-
 ### Environment
 
 Create a conda environment with the necessary packages.
